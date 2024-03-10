@@ -9,3 +9,5 @@ OUTPUT: CSV file: timepoint, heart rate.
 HOW: attempt to force AI to code.
 
 RESULT: achieved full pipeline, got heart rate.
+
+NOTE: your mileage may vary.
