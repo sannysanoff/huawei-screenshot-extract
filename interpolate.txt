@@ -1,0 +1,30 @@
+import sys
+import numpy as np
+from scipy.interpolate import interp1d
+
+def interpolate_data(file_path):
+    # Read the data from the file
+    data = np.loadtxt(file_path)
+
+    # Separate the time and values
+    times = data[:, 0]
+    values = data[:, 1]
+
+    # Create an interpolation function
+    interpolation_function = interp1d(times, values, kind='linear')
+
+    # Create an array of integer seconds from the first to the last time
+    seconds = np.arange(np.ceil(times[0]), np.floor(times[-1]) + 1)
+
+    # Interpolate values for each second
+    interpolated_values = interpolation_function(seconds)
+
+    # Round the interpolated values to one decimal place
+    rounded_values = np.round(interpolated_values, 1)
+
+    # Output the results
+    for second, value in zip(seconds, rounded_values):
+        print(f"{second:.0f} {value}")
+
+file_path = sys.argv[1]
+interpolate_data(file_path)
